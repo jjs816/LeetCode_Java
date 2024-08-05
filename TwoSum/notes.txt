@@ -1,0 +1,19 @@
+TwoSum Problem: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+Assume that each input would have exactly one solution.
+
+Thought Process:
+
+1) Initial thought was to have two loops, i=0 through n and another from j=i+1 to n. For each combination, check if the sum = target, if yes, return result[i,j]
+Though this approach gave results, the time complexity is O(n^2).
+
+2) Use HashMaps.
+Here I thought we could store the values we look at in a hashmap and just refer it as our digest.
+When we're finding two elements adding up to a target, that means we are trying to find element2 such that it is equal to the complement (target-element1).
+
+So in this case, we start with an empty hashmap, for 0th element, we check if we found the complement in the hashmap (which we don't because the hashmap is empty),
+if complement is not found we do map.put(nums[i],i) associating the number with its index.
+Next, we look at the element at 1st position, recalculate the complement, and find the complement in the hashmap, if we don't find it, we store [nums[1],1] in our hashmap.
+We keep doing this until map.containsKey(complement) condition is satisfied, in which case we return new int[]{map.get(complement), i}.
+
+The idea was simple, instead of looping and checking everytime, we store the numbers in a map with their indices. And when we find a complement "match", we have the result. 
